@@ -1,52 +1,34 @@
 <template>
   <v-app>
-    <v-container fluid>
-      <v-row align="start" justify="center">
-        <v-col cols="10">
-          <v-textarea
-          outlined
-          name="input-7-4"
-          label="テキストを入力してください"
-          v-model="InputText"
-        ></v-textarea>
-        </v-col>
-        <v-col cols="2">
-          <v-btn outlined @click="SendData"> 文字数をカウント </v-btn>
-        </v-col>
-      </v-row>
-
-      <v-row align="start" justify="center">
-        <v-col cols="6">
-        <v-card
-          max-width="450"
-          class="mx-auto"
-        >
-          <v-toolbar
-            dark
-          >
-            <v-toolbar-title>Result</v-toolbar-title>
-          </v-toolbar>
-
-          <v-list three-line>
-            <template v-for="(item, index) in items">
-              <v-list-item
-                :key="item.title"
-              >
-                <v-list-item-content>
-                  <v-list-item-title >{{ item.count }}文字です</v-list-item-title>
-                  <v-list-item-subtitle> {{ item.text }} </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-              <v-divider
-                :key="index"
-                :inset="item.inset"
-              ></v-divider>
-            </template>
-          </v-list>
-        </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-app-bar color="primary" dark absolute app height="100">
+      <v-toolbar-title class="flex text-center" ><h2>Ging!</h2></v-toolbar-title>
+      <!-- <v-btn outlined>Button</v-btn> -->
+    </v-app-bar>
+    <v-footer color="primary" dark absolute app>
+      <v-col class="font-weight-medium text-center" cols=12>Footer</v-col>
+    </v-footer>
+    <v-main>
+      <v-container fluid>
+          <v-row align="start" justify="center">
+          <v-col cols="10">
+          <v-text-field
+            outlined
+            rounded=True
+            append-icon="mdi-magnify"
+            background-color="grey lighten-3"
+            v-model="InputText"
+            @click:append="SendData"
+            label="検索またはURLを入力"
+            name="input-7-4"
+            type="text">
+            <!-- <template v-slot:append-outer>
+              <v-btn color="primary">検索</v-btn>
+            </template> -->
+          </v-text-field>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
