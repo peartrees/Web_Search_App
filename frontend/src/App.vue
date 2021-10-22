@@ -24,7 +24,7 @@
          <h1>Your query is : {{InputText}}</h1>
        </v-container>
        <v-container>
-         <Search v-if="currentComponent === 'Search'"></Search>
+         <Search :Search_data="toChildSearchResult" v-if="currentComponent === 'Search'"></Search>
        </v-container>
     <v-footer color="primary" dark absolute app>
       <v-col class="font-weight-medium text-center" cols=12>Copyright © Ging! All Rights Reserved</v-col>
@@ -44,7 +44,8 @@ export default {
       InputText: '',
       TextLength: null,
       currentComponent: 'home',
-      items: []
+      items: [],
+      toChildSearchResult: []
     }
   },
   components: {
@@ -57,7 +58,7 @@ export default {
       axios
         .post('/api/post', data)
         .then(response => {
-          this.items.push(response.data)
+          this.toChildSearchResult.push(response.data)
         })
         .catch(err => {
           alert('APIサーバと接続できません')
