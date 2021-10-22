@@ -2,7 +2,7 @@
   <v-app>
         <v-container fluid class="primary">
          <v-row align="center">
-          <v-col cols=2 class="text-center"><h1>Ging！</h1></v-col>
+          <v-col cols=2 class="text-center"><h1 style="color:white">Ging！</h1></v-col>
             <v-col cols=8 class="text-center">
               <br>
              <v-text-field
@@ -27,7 +27,7 @@
          <Search v-if="currentComponent === 'Search'"></Search>
        </v-container>
     <v-footer color="primary" dark absolute app>
-      <v-col class="font-weight-medium text-center" cols=12>Footer</v-col>
+      <v-col class="font-weight-medium text-center" cols=12>Copyright © Ging! All Rights Reserved</v-col>
     </v-footer>
   </v-app>
 </template>
