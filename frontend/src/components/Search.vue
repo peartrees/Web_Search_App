@@ -6,8 +6,8 @@
       <v-divider class="mx-3"></v-divider>
       <v-card-text>
         <div class="body-1 mb-1">Displays Search Results</div>
-        <div class="body-2 mb-2">{{Search_data[0]}}</div>
-        <div class="body-2 mb-2">{{Search_data[0]}}</div>
+        <div class="body-2 mb-2">{{search_data[0]}}</div>
+        <div class="body-2 mb-2">{{search_data[0]}}</div>
      </v-card-text>
       </v-card>
     </v-col>
@@ -17,8 +17,8 @@
       <v-divider class="mx-3"></v-divider>
       <v-card-text>
         <div class="body-1 mb-1">Displays Search Results</div>
-        <div class="body-2 mb-2">{{Search_data[1]}}</div>
-        <div class="body-2 mb-2">{{Search_data[1]}}</div>
+        <div class="body-2 mb-2">{{search_data[1]}}</div>
+        <div class="body-2 mb-2">{{search_data[1]}}</div>
      </v-card-text>
     </v-card>
     </v-col>
@@ -27,8 +27,8 @@
 
 <script>
 export default {
-  name: 'Search',
-  props: ['Search_data'],
+  name: 'search',
+  props: ['search_data'],
   data () {
     return {
       title: 'this is Search result area'

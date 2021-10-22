@@ -10,8 +10,8 @@
               rounded
               append-icon="mdi-magnify"
               background-color="grey lighten-2"
+              @click:append="SendData(); currentComponent='Search'"
               v-model="InputText"
-              @click:append="SendData, currentComponent='Search'"
               label="Search"
               single-line
               name="input-7-4"
@@ -24,7 +24,7 @@
          <h1>Your query is : {{InputText}}</h1>
        </v-container>
        <v-container>
-         <Search :Search_data="toChildSearchResult" v-if="currentComponent === 'Search'"></Search>
+         <Search :search_data='toChildSearchResult' v-if="currentComponent === 'Search'"></Search>
        </v-container>
     <v-footer color="primary" dark absolute app>
       <v-col class="font-weight-medium text-center" cols=12>Copyright © Ging! All Rights Reserved</v-col>
@@ -45,7 +45,7 @@ export default {
       TextLength: null,
       currentComponent: 'home',
       items: [],
-      toChildSearchResult: []
+      toChildSearchResult: ''
     }
   },
   components: {
@@ -53,12 +53,12 @@ export default {
   },
   methods: {
     SendData: function () {
-      var data = { text: this.InputText }
+      const data = { text: this.InputText }
 
       axios
         .post('/api/post', data)
         .then(response => {
-          this.toChildSearchResult.push(response.data)
+          this.toChildSearchResult = response.data
         })
         .catch(err => {
           alert('APIサーバと接続できません')
