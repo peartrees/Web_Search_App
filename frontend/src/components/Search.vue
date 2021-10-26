@@ -17,8 +17,8 @@
       <v-divider class="mx-3"></v-divider>
       <v-card-text>
         <div class="body-1 mb-1">Displays Search Results</div>
-        <div class="body-2 mb-2">{{search_data[1]}}</div>
-        <div class="body-2 mb-2">{{search_data[1]}}</div>
+        <div class="body-2 mb-2">{{search_data}}</div>
+        <div class="body-2 mb-2">{{search_data}}</div>
      </v-card-text>
     </v-card>
     </v-col>
