@@ -22,12 +22,16 @@
       <v-divider class="mx-3"></v-divider>
       <v-card-text>
         <!-- <div class="body-1 mb-1">Displays Bing Results</div> -->
-        <ul>
-          <li v-for="value in search_data" :key="value.id">
-            <a v-bind:href="value.url" target="_blank">{{value.name}}</a>
+        <v-list rounded color="primary">
+          <v-list-item v-for="(value, index) in search_data" :key="value.id">
+            <v-list-item-content>
+              <v-list-item-title>
+                <a v-bind:href="value.url" target="_blank">{{index+1}}: {{value.name}}</a>
+              </v-list-item-title>
             <p>{{value.snippet}}</p>
-         </li>
-        </ul>
+          </v-list-item-content>
+          </v-list-item>
+        </v-list>
         <!-- <div class="body-2 mb-2">{{search_data}}</div> -->
      </v-card-text>
     </v-card>
