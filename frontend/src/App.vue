@@ -2,7 +2,8 @@
   <v-app>
         <v-container fluid class="primary">
          <v-row align="center">
-          <v-col cols=2 class="text-center"><h1 style="color:white">Ging！</h1></v-col>
+          <v-col cols=2 class="text-center"><a href="/"><h1 style="color:white">Ging！</h1></a></v-col>
+          <!-- <v-col cols=2 class="text-center"><a href="/"><img src="@/assets/Ging.png"/></a></v-col> -->
             <v-col cols=8 class="text-center">
               <br>
              <v-text-field
@@ -23,12 +24,15 @@
        <v-container>
          <h1>Your query is : {{InputText}}</h1>
        </v-container>
-       <v-container>
+      <v-container>
          <Search :search_data='toChildSearchResult' v-if="currentComponent === 'Search'"></Search>
-       </v-container>
-    <v-footer color="primary" dark absolute app>
-      <v-col class="font-weight-medium text-center" cols=12>Copyright © Ging! All Rights Reserved</v-col>
-    </v-footer>
+      </v-container>
+      <v-col><br></v-col>
+      <v-container>
+        <v-footer color="primary" dark absolute app>
+          <v-col class="font-weight-medium text-center" cols=12>Copyright © Ging! All Rights Reserved</v-col>
+        </v-footer>
+     </v-container>
   </v-app>
 </template>
 
