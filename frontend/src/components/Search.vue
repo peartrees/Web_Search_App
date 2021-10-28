@@ -1,5 +1,10 @@
 <template>
   <v-row>
+    <!-- <div class="searching">
+      <div class="loader-space" v-show="loading">
+        <vue-loaders-ball-beat color="#FFF" class="loader"></vue-loaders-ball-beat>
+      </div>
+    </div> -->
     <v-col cols=6>
       <v-card raised color="blue lighten-4">
       <v-subheader><h3>Google results</h3></v-subheader>
@@ -37,6 +42,11 @@ export default {
   data () {
     return {
       title: 'this is Search result area'
+    }
+  },
+  computed: {
+    loading () {
+      return this.$store.getters['loading/loading']
     }
   }
 }

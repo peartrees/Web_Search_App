@@ -11,7 +11,7 @@
               rounded
               append-icon="mdi-magnify"
               background-color="grey lighten-2"
-              @click:append="SendData(); currentComponent='Search'"
+              @click:append="SendData(); loading=true; currentComponent='Search'"
               v-model="InputText"
               label="Search"
               single-line
@@ -23,16 +23,21 @@
        </v-container>
        <v-container>
          <h1>Your query is : {{InputText}}</h1>
-       </v-container>
-      <v-container>
+        </v-container>
+        <v-container v-show="loading === true" id="overlay">
+          <div id="content">
+            <vue-loaders name="pacman" color="blue" scale="1"></vue-loaders>
+          </div>
+        </v-container>
+       <v-container>
          <Search :search_data='toChildSearchResult' v-if="currentComponent === 'Search'"></Search>
-      </v-container>
-      <v-col><br></v-col>
-      <v-container>
+       </v-container>
+       <v-col><br></v-col>
+       <v-container>
         <v-footer color="primary" dark absolute app>
           <v-col class="font-weight-medium text-center" cols=12>Copyright © Ging! All Rights Reserved</v-col>
         </v-footer>
-     </v-container>
+       </v-container>
   </v-app>
 </template>
 
@@ -47,6 +52,7 @@ export default {
       // 入力データ
       InputText: '',
       TextLength: null,
+      loading: false,
       currentComponent: 'home',
       items: [],
       toChildSearchResult: ''
@@ -63,6 +69,7 @@ export default {
         .post('/api/post', data)
         .then(response => {
           this.toChildSearchResult = response.data
+          this.loading = false
         })
         .catch(err => {
           alert('APIサーバと接続できません')
@@ -72,3 +79,18 @@ export default {
   }
 }
 </script>
+
+<style>
+#overlay{
+  z-index:1;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
