@@ -11,8 +11,9 @@
               rounded
               append-icon="mdi-magnify"
               background-color="grey lighten-2"
-              @click:append="SendData(); loading=true; currentComponent='Search'"
+              @click:append="SendData(); loading=true"
               v-model="InputText"
+              @keydown.enter="SendData(); loading=true"
               label="Search"
               single-line
               name="input-7-4"
@@ -21,13 +22,16 @@
             </v-col>
           </v-row>
        </v-container>
-       <v-container>
+       <!-- <v-container>
          <h1>Your query is : {{InputText}}</h1>
-        </v-container>
-        <v-container v-show="loading === true" id="overlay">
+        </v-container> -->
+        <v-container v-show="loading === true">
+        <v-overlay>
           <div id="content">
             <vue-loaders name="pacman" color="blue" scale="1"></vue-loaders>
+            <h1>Now Loading・・・</h1>
           </div>
+        </v-overlay>
         </v-container>
        <v-container>
          <Search :search_data='toChildSearchResult' v-if="currentComponent === 'Search'"></Search>
@@ -70,6 +74,7 @@ export default {
         .then(response => {
           this.toChildSearchResult = response.data
           this.loading = false
+          this.currentComponent = true
         })
         .catch(err => {
           alert('APIサーバと接続できません')

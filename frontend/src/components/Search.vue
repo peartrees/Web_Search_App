@@ -9,31 +9,26 @@
       <v-card raised color="blue lighten-4">
       <v-subheader><h3>Google results</h3></v-subheader>
       <v-divider class="mx-3"></v-divider>
-      <v-card-text>
         <div class="body-1 mb-1">Displays Google Results</div>
-        <div class="body-2 mb-2">Results of Google</div>
         <!-- <div class="body-2 mb-2">{{search_data[0]}}</div> -->
-      </v-card-text>
      </v-card>
     </v-col>
     <v-col cols=6>
       <v-card raised color="blue lighten-4">
       <v-subheader><h3>Bing results</h3></v-subheader>
       <v-divider class="mx-3"></v-divider>
-      <v-card-text>
         <!-- <div class="body-1 mb-1">Displays Bing Results</div> -->
-        <v-list rounded color="primary">
+        <v-list>
           <v-list-item v-for="(value, index) in search_data" :key="value.id">
             <v-list-item-content>
               <v-list-item-title>
-                <a v-bind:href="value.url" target="_blank">{{index+1}}: {{value.name}}</a>
+                <a v-bind:href="value.url" target="_blank">{{index+1}}. {{value.name}}</a>
               </v-list-item-title>
-            <p>{{value.snippet}}</p>
+            <p>{value.snippet}</p>
           </v-list-item-content>
           </v-list-item>
         </v-list>
         <!-- <div class="body-2 mb-2">{{search_data}}</div> -->
-     </v-card-text>
     </v-card>
    </v-col>
  </v-row>
