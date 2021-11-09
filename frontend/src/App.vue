@@ -74,7 +74,7 @@ export default {
         .then(response => {
           this.toChildSearchResult = response.data
           this.loading = false
-          this.currentComponent = true
+          this.currentComponent = 'Search'
         })
         .catch(err => {
           alert('APIサーバと接続できません')
