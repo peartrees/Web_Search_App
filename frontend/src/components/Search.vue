@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols=6>
       <v-card raised color="blue lighten-4">
-      <v-subheader><h3>Google results</h3></v-subheader>
+      <v-subheader><h3>Google result</h3></v-subheader>
       <v-divider class="mx-3"></v-divider>
         <!-- <div class="body-1 mb-1">Displays Google Results</div> -->
         <!-- <div class="body-2 mb-2">{{search_data[0]}}</div> -->
