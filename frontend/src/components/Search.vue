@@ -22,10 +22,10 @@
       <v-divider class="mx-3"></v-divider>
         <!-- <div class="body-1 mb-1">Displays Bing Results</div> -->
         <v-list>
-          <v-list-item v-for="(value, index) in search_data[1]" :key="value.cacheid">
+          <v-list-item v-for="(value, index_ggl) in search_data[1]" :key="value.cacheid">
             <v-list-item-content>
               <v-list-item-title>
-                <a v-bind:href="value.link" target="_blank">{{index+1}}. {{value.title}}</a>
+                <a v-bind:href="value.link" target="_blank">{{index_ggl+1}}. {{value.title}}</a>
               </v-list-item-title>
             <p v-html="value.snippet"></p>
           </v-list-item-content>
