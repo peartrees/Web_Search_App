@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols=6>
       <v-card raised color="blue lighten-4">
-      <v-subheader><h3>Bing results</h3></v-subheader>
+      <v-subheader><h3>Bing Search Results</h3></v-subheader>
       <v-divider class="mx-3"></v-divider>
       <v-list>
         <v-list-item v-for="(value, index) in search_data[0]" :key="value.id">
@@ -18,7 +18,7 @@
     </v-col>
     <v-col cols=6>
       <v-card raised color="blue lighten-4">
-      <v-subheader><h3>Google results</h3></v-subheader>
+      <v-subheader><h3>Google Search Results</h3></v-subheader>
       <v-divider class="mx-3"></v-divider>
         <!-- <div class="body-1 mb-1">Displays Bing Results</div> -->
         <v-list>
