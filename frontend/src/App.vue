@@ -81,6 +81,9 @@ export default {
           err = null
         })
     }
+    // Get_Suggestion: function () {
+    //   const data = { text: this.InputText }
+    // }
   }
 }
 </script>
