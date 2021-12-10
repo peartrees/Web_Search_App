@@ -6,19 +6,26 @@
           <!-- <v-col cols=2 class="text-center"><a href="/"><img src="@/assets/Ging.png"/></a></v-col> -->
             <v-col cols=8 class="text-center">
               <br>
-             <v-text-field
-              outlined
-              rounded
-              append-icon="mdi-magnify"
-              background-color="grey lighten-2"
-              @click:append="SendData(); loading=true"
-              v-model="InputText"
-              @keydown.enter="SendData(); loading=true"
-              label="Search"
-              single-line
-              name="input-7-4"
-              type="text">
-             </v-text-field>
+              <vue-simple-suggest
+                v-model="InputText"
+                :list="getSuggestionList"
+                :filter-by-query="true"
+                id="suggest-input">
+                <v-text-field
+                  outlined
+                  rounded
+                  append-icon="mdi-magnify"
+                  background-color="grey lighten-2"
+                  @click:append="SendData(); loading=true"
+                  v-model="InputText"
+                  @keydown.enter="SendData(); loading=true"
+                  label="Search"
+                  single-line
+                  name="input-7-4"
+                  type="text"
+                  autocomplete="off">
+               </v-text-field>
+              </vue-simple-suggest>
             </v-col>
           </v-row>
        </v-container>
@@ -48,6 +55,8 @@
 <script>
 import Search from './components/Search.vue'
 import axios from 'axios'
+import VueSimpleSuggest from 'vue-simple-suggest'
+import 'vue-simple-suggest/dist/styles.css'
 
 export default {
   name: 'App',
@@ -59,11 +68,13 @@ export default {
       loading: false,
       currentComponent: 'home',
       items: [],
-      toChildSearchResult: ''
+      toChildSearchResult: '',
+      Suggestion_List: ['Canada', 'China', 'Cameroon', 'Italy', 'Iraq', 'Iceland']
     }
   },
   components: {
-    Search
+    Search,
+    VueSimpleSuggest
   },
   methods: {
     SendData: function () {
@@ -80,10 +91,10 @@ export default {
           alert('APIサーバと接続できません')
           err = null
         })
+    },
+    getSuggestionList () {
+      return ['Canada', 'China', 'Cameroon', 'Italy', 'Iraq', 'Iceland']
     }
-    // Get_Suggestion: function () {
-    //   const data = { text: this.InputText }
-    // }
   }
 }
 </script>
@@ -100,5 +111,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#suggestinput{
+  background-color:#E0E0E0;
 }
 </style>
