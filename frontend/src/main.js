@@ -5,6 +5,9 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import VueLoaders from 'vue-loaders'
 
+import VueSimpleSuggest from 'vue-simple-suggest'
+Vue.use(VueSimpleSuggest)
+
 Vue.use(VueLoaders)
 Vue.config.productionTip = false
 

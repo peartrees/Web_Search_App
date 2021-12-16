@@ -5,33 +5,45 @@
           <v-col cols=2 class="text-center"><a href="/"><h1 style="color:white">Ging！</h1></a></v-col>
           <!-- <v-col cols=2 class="text-center"><a href="/"><img src="@/assets/Ging.png"/></a></v-col> -->
             <v-col cols=8 class="text-center">
-              <br>
-              <vue-simple-suggest
+              <!-- <v-autocomplete
+                :search-input="InputText"
+                color="white"
+                item-text="Description"
+                cache-items
+                hide-no-data
+                hide-selected
+                return-object
+                outlined
+                rounded
+                append-icon="mdi-magnify"
+                background-color="grey lighten-2"
                 v-model="InputText"
-                :list="getSuggestionList"
-                :filter-by-query="true"
-                id="suggest-input">
-                <v-text-field
-                  outlined
-                  rounded
-                  append-icon="mdi-magnify"
-                  background-color="grey lighten-2"
-                  @click:append="SendData(); loading=true"
-                  v-model="InputText"
-                  @keydown.enter="SendData(); loading=true"
-                  label="Search"
-                  single-line
-                  name="input-7-4"
-                  type="text"
-                  autocomplete="off">
-               </v-text-field>
-              </vue-simple-suggest>
+                @click:append="SendData(InputText); loading=true"
+                @keydown.enter="SendData(InputText); loading=true"
+                label="Search"
+                single-line
+                name="input-7-4"
+                type="text">
+              </v-autocomplete> -->
+              <v-autocomplete
+                v-model="select"
+                :loading="Sug_Loading"
+                :items="items"
+                :search-input.sync="search"
+                cache-items
+                class="mx-4"
+                flat
+                hide-no-data
+                hide-details
+                label="Enter Your Query"
+                solo-inverted
+                background-color='#E0E0E0'
+                color='Black'
+                @keydown.enter="SendData(search); loading=true">
+              </v-autocomplete>
             </v-col>
           </v-row>
        </v-container>
-       <!-- <v-container>
-         <h1>Your query is : {{InputText}}</h1>
-        </v-container> -->
         <v-container v-show="loading === true">
         <v-overlay>
           <div id="content">
@@ -55,8 +67,8 @@
 <script>
 import Search from './components/Search.vue'
 import axios from 'axios'
-import VueSimpleSuggest from 'vue-simple-suggest'
-import 'vue-simple-suggest/dist/styles.css'
+// import VueSimpleSuggest from 'vue-simple-suggest'
+// import 'vue-simple-suggest/dist/styles.css'
 
 export default {
   name: 'App',
@@ -66,20 +78,83 @@ export default {
       InputText: '',
       TextLength: null,
       loading: false,
+      Sug_Loading: false,
       currentComponent: 'home',
       items: [],
       toChildSearchResult: '',
-      Suggestion_List: ['Canada', 'China', 'Cameroon', 'Italy', 'Iraq', 'Iceland']
+      search: '',
+      select: '',
+      states: [
+        'Alabama',
+        'Alaska',
+        'American Samoa',
+        'Arizona',
+        'Arkansas',
+        'California',
+        'Colorado',
+        'Connecticut',
+        'Delaware',
+        'District of Columbia',
+        'Federated States of Micronesia',
+        'Florida',
+        'Georgia',
+        'Guam',
+        'Hawaii',
+        'Idaho',
+        'Illinois',
+        'Indiana',
+        'Iowa',
+        'Kansas',
+        'Kentucky',
+        'Louisiana',
+        'Maine',
+        'Marshall Islands',
+        'Maryland',
+        'Massachusetts',
+        'Michigan',
+        'Minnesota',
+        'Mississippi',
+        'Missouri',
+        'Montana',
+        'Nebraska',
+        'Nevada',
+        'New Hampshire',
+        'New Jersey',
+        'New Mexico',
+        'New York',
+        'North Carolina',
+        'North Dakota',
+        'Northern Mariana Islands',
+        'Ohio',
+        'Oklahoma',
+        'Oregon',
+        'Palau',
+        'Pennsylvania',
+        'Puerto Rico',
+        'Rhode Island',
+        'South Carolina',
+        'South Dakota',
+        'Tennessee',
+        'Texas',
+        'Utah',
+        'Vermont',
+        'Virgin Island',
+        'Virginia',
+        'Washington',
+        'West Virginia',
+        'Wisconsin',
+        'Wyoming'
+      ]
     }
   },
   components: {
-    Search,
-    VueSimpleSuggest
+    Search
   },
   methods: {
-    SendData: function () {
-      const data = { text: this.InputText }
-
+    SendData: function (input) {
+      const data = { text: input }
+      console.log(input)
+      console.log(data)
       axios
         .post('/api/post', data)
         .then(response => {
@@ -92,8 +167,24 @@ export default {
           err = null
         })
     },
-    getSuggestionList () {
+    getSuggestionList (input) {
+      console.log(input)
       return ['Canada', 'China', 'Cameroon', 'Italy', 'Iraq', 'Iceland']
+    },
+    querySelections (v) {
+      this.Sug_Loading = true
+      // Simulated ajax query
+      setTimeout(() => {
+        this.items = this.states.filter(e => {
+          return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+        })
+        this.Sug_Loading = false
+      }, 500)
+    }
+  },
+  watch: {
+    search (val) {
+      val && val !== this.select && this.querySelections(val)
     }
   }
 }
@@ -111,8 +202,5 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-#suggestinput{
-  background-color:#E0E0E0;
 }
 </style>
