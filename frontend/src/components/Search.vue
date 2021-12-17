@@ -20,7 +20,6 @@
       <v-card raised color="blue lighten-4">
       <v-subheader><h3>Google Search Results</h3></v-subheader>
       <v-divider class="mx-3"></v-divider>
-        <!-- <div class="body-1 mb-1">Displays Bing Results</div> -->
         <v-list>
           <v-list-item v-for="(value, index_ggl) in search_data[1]" :key="value.cacheid">
             <v-list-item-content>
@@ -31,7 +30,6 @@
           </v-list-item-content>
           </v-list-item>
         </v-list>
-        <!-- <div class="body-2 mb-2">{{search_data}}</div> -->
     </v-card>
    </v-col>
  </v-row>

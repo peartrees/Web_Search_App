@@ -4,7 +4,7 @@
          <v-row align="center">
           <v-col cols=2 class="text-center"><a href="/"><h1 style="color:white">Ging！</h1></a></v-col>
           <!-- <v-col cols=2 class="text-center"><a href="/"><img src="@/assets/Ging.png"/></a></v-col> -->
-            <v-col cols=8 class="text-center">
+            <v-col cols=8 class="text-center" style="color:black">
               <!-- <v-autocomplete
                 :search-input="InputText"
                 color="white"
@@ -36,9 +36,12 @@
                 hide-no-data
                 hide-details
                 label="Enter Your Query"
+                prepend-icon="mdi-magnify"
+                @click:prepend="SendData(InputText); loading=true"
                 solo-inverted
                 background-color='#E0E0E0'
-                color='Black'
+                color='deep-purple darken-2'
+                item-color='deep-purple darken-2'
                 @keydown.enter="SendData(search); loading=true">
               </v-autocomplete>
             </v-col>
@@ -84,6 +87,7 @@ export default {
       toChildSearchResult: '',
       search: '',
       select: '',
+      suggestCallBack: '',
       states: [
         'Alabama',
         'Alaska',
