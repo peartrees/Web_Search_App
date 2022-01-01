@@ -5,10 +5,10 @@ import json
 from googleapiclient.discovery import build
 
 # postされたテキストを検索するapi(POSTメソッド)
-Search_bp = Blueprint('Call_Search_API', __name__, url_prefix='/api/post')
+Search_bp = Blueprint('Call_Search_API', __name__, url_prefix='/api/call_search/post')
 
 # postされたテキストを検索するapi(getメソッド)
-Suggest_bp = Blueprint('Get_Suggest_API', __name__, url_prefix='/api/get')
+Suggest_bp = Blueprint('Get_Suggest_API', __name__, url_prefix='/api/get_suggest/get')
 
 class Call_Search(Resource):
     def post(self):
@@ -38,14 +38,14 @@ class Call_Search(Resource):
 
 
 class Get_Suggest(Resource):
-    def get(self):
+    def post(self):
         user_query = request.json["text"]
         print(user_query)
-        return user_query, 'this is result'
+        return user_query
 
 
 Call_Search_API = Api(Search_bp)
-Call_Search_API.add_resource(Call_Search)
+Call_Search_API.add_resource(Call_Search, '')
 #
 Get_Suggest_API = Api(Suggest_bp)
-Get_Suggest_API.add_resource(Get_Suggest)
+Get_Suggest_API.add_resource(Get_Suggest, '')

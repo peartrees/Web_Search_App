@@ -4,8 +4,8 @@ from api import Suggest_bp
 
 
 app = Flask(__name__, static_folder='../dist/static', template_folder='../dist')
-app.register_blueprint(Search_bp, url_prefix='/api/post')
-app.register_blueprint(Suggest_bp, url_prefix='/api/get')
+app.register_blueprint(Search_bp)
+app.register_blueprint(Suggest_bp)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

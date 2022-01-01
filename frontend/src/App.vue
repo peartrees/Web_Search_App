@@ -162,7 +162,7 @@ export default {
       console.log(input)
       console.log(data)
       axios
-        .post('/api/post', data)
+        .post('/api/call_search/post', data)
         .then(response => {
           this.toChildSearchResult = response.data
           this.loading = false
@@ -184,11 +184,11 @@ export default {
       }, 500)
     },
     querySelections: function (v) {
-      const data2 = { text: this.search }
+      const user_query = { text: this.search }
       console.log(data2)
       this.Sug_Loading = true
       axios
-        .post('/api/get', data2)
+        .post('/api/get_suggest/get', user_query)
         .then(response => {
           console.log(response)
           this.Sug_Result = response.data
