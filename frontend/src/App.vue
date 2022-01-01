@@ -70,6 +70,7 @@
 <script>
 import Search from './components/Search.vue'
 import axios from 'axios'
+
 // import VueSimpleSuggest from 'vue-simple-suggest'
 // import 'vue-simple-suggest/dist/styles.css'
 
@@ -84,6 +85,7 @@ export default {
       Sug_Loading: false,
       currentComponent: 'home',
       items: [],
+      Sug_Result: [],
       toChildSearchResult: '',
       search: '',
       select: '',
@@ -171,11 +173,7 @@ export default {
           err = null
         })
     },
-    getSuggestionList (input) {
-      console.log(input)
-      return ['Canada', 'China', 'Cameroon', 'Italy', 'Iraq', 'Iceland']
-    },
-    querySelections (v) {
+    querySelections2 (v) {
       this.Sug_Loading = true
       // Simulated ajax query
       setTimeout(() => {
@@ -184,6 +182,35 @@ export default {
         })
         this.Sug_Loading = false
       }, 500)
+    },
+    querySelections: function (v) {
+      const data2 = { text: this.search }
+      console.log(data2)
+      this.Sug_Loading = true
+      axios
+        .post('/api/get', data2)
+        .then(response => {
+          console.log(response)
+          this.Sug_Result = response.data
+          // console.log(this.Sug_Result)
+          this.Sug_loading = false
+        })
+        .catch(err => {
+          alert('APIサーバと接続できません')
+          err = null
+        })
+      // Simulated ajax query
+      // axios.get('https://www.google.com/complete/search',
+      //   { params: { hl: 'ja', q: v, output: 'toolbar' }, withCredentials: true })
+      //   .then(response => {
+      // console.log(response)
+      // this.Sug_Result = response.data
+      //     this.Sug_loading = false
+      //   })
+      //   .catch(err => {
+      //     alert('APIサーバと接続できません')
+      //     err = null
+      //   })
     }
   },
   watch: {

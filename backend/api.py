@@ -7,8 +7,8 @@ from googleapiclient.discovery import build
 # postされたテキストを検索するapi(POSTメソッド)
 Search_bp = Blueprint('Call_Search_API', __name__, url_prefix='/api/post')
 
-# postされたテキストを検索するapi(POSTメソッド)
-# Suggest_bp = Blueprint('Get_Suggest_API', __name__, url_prefix='/api/post')
+# postされたテキストを検索するapi(getメソッド)
+Suggest_bp = Blueprint('Get_Suggest_API', __name__, url_prefix='/api/get')
 
 class Call_Search(Resource):
     def post(self):
@@ -37,13 +37,15 @@ class Call_Search(Resource):
         return total_result
 
 
-# class Get_Suggest(Resource):
-#     def post(self):
-#         return "this is suggest"
-        # sugget api
+class Get_Suggest(Resource):
+    def get(self):
+        user_query = request.json["text"]
+        print(user_query)
+        return user_query, 'this is result'
+
 
 Call_Search_API = Api(Search_bp)
-Call_Search_API.add_resource(Call_Search, '')
+Call_Search_API.add_resource(Call_Search)
 #
-# Get_Suggest_API = Api(Get_Suggest)
-# Get_Suggest_API.add_resource(Get_Suggest, '')
+Get_Suggest_API = Api(Suggest_bp)
+Get_Suggest_API.add_resource(Get_Suggest)
