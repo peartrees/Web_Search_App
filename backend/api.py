@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, session
 from flask_restful import Api, Resource
 import requests
 import json
+from lxml import etree
 from googleapiclient.discovery import build
 
 # postされたテキストを検索するapi(POSTメソッド)
@@ -40,8 +41,18 @@ class Call_Search(Resource):
 class Get_Suggest(Resource):
     def post(self):
         user_query = request.json["text"]
-        print(user_query)
-        return user_query
+        google_r = requests.get("http://www.google.com/complete/search",
+                         params={'q':user_query,
+                                 'hl':'ja',
+                                 'ie':'utf_8',
+                                 'oe':'utf_8',
+                                 'output': 'toolbar'})
+
+        google_root = etree.XML(google_r.text)
+        google_sugs = google_root.xpath("//suggestion")
+        google_sugstrs = [s.get("data") for s in google_sugs]
+        print(google_sugstrs)
+        return google_sugstrs
 
 
 Call_Search_API = Api(Search_bp)

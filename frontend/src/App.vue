@@ -89,68 +89,7 @@ export default {
       toChildSearchResult: '',
       search: '',
       select: '',
-      suggestCallBack: '',
-      states: [
-        'Alabama',
-        'Alaska',
-        'American Samoa',
-        'Arizona',
-        'Arkansas',
-        'California',
-        'Colorado',
-        'Connecticut',
-        'Delaware',
-        'District of Columbia',
-        'Federated States of Micronesia',
-        'Florida',
-        'Georgia',
-        'Guam',
-        'Hawaii',
-        'Idaho',
-        'Illinois',
-        'Indiana',
-        'Iowa',
-        'Kansas',
-        'Kentucky',
-        'Louisiana',
-        'Maine',
-        'Marshall Islands',
-        'Maryland',
-        'Massachusetts',
-        'Michigan',
-        'Minnesota',
-        'Mississippi',
-        'Missouri',
-        'Montana',
-        'Nebraska',
-        'Nevada',
-        'New Hampshire',
-        'New Jersey',
-        'New Mexico',
-        'New York',
-        'North Carolina',
-        'North Dakota',
-        'Northern Mariana Islands',
-        'Ohio',
-        'Oklahoma',
-        'Oregon',
-        'Palau',
-        'Pennsylvania',
-        'Puerto Rico',
-        'Rhode Island',
-        'South Carolina',
-        'South Dakota',
-        'Tennessee',
-        'Texas',
-        'Utah',
-        'Vermont',
-        'Virgin Island',
-        'Virginia',
-        'Washington',
-        'West Virginia',
-        'Wisconsin',
-        'Wyoming'
-      ]
+      suggestCallBack: ''
     }
   },
   components: {
@@ -184,33 +123,20 @@ export default {
       }, 500)
     },
     querySelections: function (v) {
-      const user_query = { text: this.search }
-      console.log(data2)
+      const UserQuery = { text: this.search }
+      console.log(UserQuery)
       this.Sug_Loading = true
       axios
-        .post('/api/get_suggest/get', user_query)
+        .post('/api/get_suggest/get', UserQuery)
         .then(response => {
-          console.log(response)
-          this.Sug_Result = response.data
-          // console.log(this.Sug_Result)
-          this.Sug_loading = false
+          this.items = response.data
+          console.log(response.data)
+          this.Sug_Loading = false
         })
         .catch(err => {
           alert('APIサーバと接続できません')
           err = null
         })
-      // Simulated ajax query
-      // axios.get('https://www.google.com/complete/search',
-      //   { params: { hl: 'ja', q: v, output: 'toolbar' }, withCredentials: true })
-      //   .then(response => {
-      // console.log(response)
-      // this.Sug_Result = response.data
-      //     this.Sug_loading = false
-      //   })
-      //   .catch(err => {
-      //     alert('APIサーバと接続できません')
-      //     err = null
-      //   })
     }
   },
   watch: {
