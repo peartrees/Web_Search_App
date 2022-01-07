@@ -11,18 +11,18 @@
                 :items="items"
                 :search-input.sync="search"
                 cache-items
-                class="mx-4"
+                v-bind:class="SearchArea"
                 flat
                 hide-no-data
                 hide-details
                 label="Enter Your Query"
                 prepend-icon="mdi-magnify"
-                @click:prepend="SendData(search); loading=true"
                 solo-inverted
-                background-color='#E0E0E0'
+                @click:prepend="SendData(search); loading=true"
+                @keypress.enter="SendData(search); loading=true"
+                background-color='blue'
                 color='deep-purple darken-2'
-                item-color='deep-purple darken-2'
-                @keypress.enter="SendData(search); loading=true">
+                item-color='deep-purple darken-2'>
               </v-autocomplete>
             </v-col>
           </v-row>
@@ -55,6 +55,7 @@ export default {
   name: 'App',
   data () {
     return {
+      SearchArea: '',
       // 入力データ
       InputText: '',
       TextLength: null,
@@ -75,8 +76,8 @@ export default {
   methods: {
     SendData: function (input) {
       const data = { text: input }
-      console.log(input)
-      console.log(data)
+      // console.log(input)
+      // console.log(data)
       axios
         .post('/api/call_search/post', data)
         .then(response => {
@@ -101,7 +102,7 @@ export default {
     },
     querySelections: function (v) {
       const UserQuery = { text: this.search }
-      console.log(UserQuery)
+      // console.log(UserQuery)
       this.Sug_Loading = true
       axios
         .post('/api/get_suggest/get', UserQuery)
@@ -136,5 +137,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.SearchArea: {
+  color: blue;
+  ::selection {
+    background-color:blue;
+    color: blue;
+  }
 }
 </style>

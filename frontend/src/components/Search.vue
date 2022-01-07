@@ -34,12 +34,6 @@
     </v-card>
    </v-col>
  </v-row>
- <v-row>
-   <v-col>
-     他のクエリにはこんなのもあります
-
-   </v-col>
- </v-row>
 </template>
 
 <script>

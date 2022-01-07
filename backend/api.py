@@ -3,6 +3,7 @@ from flask_restful import Api, Resource
 import requests
 import json
 from lxml import etree
+import time
 from googleapiclient.discovery import build
 
 # postされたテキストを検索するapi(POSTメソッド)
@@ -13,6 +14,7 @@ Suggest_bp = Blueprint('Get_Suggest_API', __name__, url_prefix='/api/get_suggest
 
 class Call_Search(Resource):
     def post(self):
+        time.sleep(1)
         total_result = []
         # postされたデータを読み込み
         input_data = request.json
@@ -30,8 +32,7 @@ class Call_Search(Resource):
 
         # ↑↑↑↑ここまでがBingの検索↑↑↑↑
         # ↓↓↓↓ここからGoogle検索↓↓↓↓
-        print(input_data)
-        print(input_data["text"])
+        # print(input_data["text"])
         CUSTOM_SEARCH_ENGINE_ID = "4c81e5f5bf3c54cf3"
         GOOGLE_API_KEY          = "AIzaSyDhwvVQkJsxQAzEyjQoyw2kWChfjB1YKJc"
         search = build("customsearch","v1",developerKey = GOOGLE_API_KEY)
@@ -39,7 +40,7 @@ class Call_Search(Resource):
         lr = 'lang_ja', gl = 'jp', num = 10, start = 1).execute()
         ggl_result = ggl_response["items"]
         total_result.append(ggl_result)
-        print(total_result)
+        # print(total_result)
         return total_result
 
 
@@ -56,7 +57,7 @@ class Get_Suggest(Resource):
         google_root = etree.XML(google_r.text)
         google_sugs = google_root.xpath("//suggestion")
         google_sugstrs = [s.get("data") for s in google_sugs]
-        print(google_sugstrs)
+        # print(google_sugstrs)
         return google_sugstrs
 
 
