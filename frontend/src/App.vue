@@ -22,7 +22,7 @@
                 background-color='#E0E0E0'
                 color='deep-purple darken-2'
                 item-color='deep-purple darken-2'
-                @keydown.enter="SendData(search); loading=true">
+                @keypress.enter="SendData(search); loading=true">
               </v-autocomplete>
             </v-col>
           </v-row>

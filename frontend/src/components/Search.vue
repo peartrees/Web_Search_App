@@ -23,7 +23,7 @@
         <v-list>
           <v-list-item v-for="(value, index_ggl) in search_data[0]" :key="value.cacheid">
             <v-list-item-content>
-              <p v-html="value.link" style="font-size: 8pt; color: #A9A9A9"></p>
+              <p v-html="value.link" style="font-size: 10pt; color: #A9A9A9"></p>
               <v-list-item-title>
                 <a v-bind:href="value.link" style="font-size: 15pt" target="_blank">{{index_ggl+1}}. {{value.title}}</a>
               </v-list-item-title>
@@ -32,6 +32,12 @@
           </v-list-item>
         </v-list>
     </v-card>
+   </v-col>
+ </v-row>
+ <v-row>
+   <v-col>
+     他のクエリにはこんなのもあります
+
    </v-col>
  </v-row>
 </template>
