@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols=6>
+    <!-- <v-col cols=6>
       <v-card raised color="blue lighten-4">
       <v-subheader><h3>Bing Search Results</h3></v-subheader>
       <v-divider class="mx-3"></v-divider>
@@ -15,13 +15,13 @@
         </v-list-item>
       </v-list>
      </v-card>
-    </v-col>
-    <v-col cols=6>
+    </v-col> -->
+    <v-col>
       <v-card raised color="blue lighten-4">
       <v-subheader><h3>Google Search Results</h3></v-subheader>
       <v-divider class="mx-3"></v-divider>
         <v-list>
-          <v-list-item v-for="(value, index_ggl) in search_data[1]" :key="value.cacheid">
+          <v-list-item v-for="(value, index_ggl) in search_data[0]" :key="value.cacheid">
             <v-list-item-content>
               <v-list-item-title>
                 <a v-bind:href="value.link" target="_blank">{{index_ggl+1}}. {{value.title}}</a>

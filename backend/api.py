@@ -17,17 +17,21 @@ class Call_Search(Resource):
         # postされたデータを読み込み
         input_data = request.json
         # Bing Web Search APIを利用してWeb検索結果を取得する
-        SUBSCRIPTION_KEY = 'd4d1d0c6fb0a494ba8fa3906b1224e48'
-        search_url = f"https://api.bing.microsoft.com/v7.0/search"
-        params = {"q": input_data["text"], "count": 10, "textDecorations": True, "textFormat": "HTML"}
-        # HTTPリクエストのヘッダにAPIキーを含める
-        headers = {"Ocp-Apim-Subscription-Key" : SUBSCRIPTION_KEY}
-        # 実際にリクエストを送る
-        bing_response = requests.get(search_url, headers=headers, params=params)
-        bing_result = bing_response.json()["webPages"]["value"]
-        total_result.append(bing_result)
+
+        # SUBSCRIPTION_KEY = 'd4d1d0c6fb0a494ba8fa3906b1224e48'
+        # search_url = f"https://api.bing.microsoft.com/v7.0/search"
+        # params = {"q": input_data["text"], "count": 10, "textDecorations": True, "textFormat": "HTML"}
+        # # HTTPリクエストのヘッダにAPIキーを含める
+        # headers = {"Ocp-Apim-Subscription-Key" : SUBSCRIPTION_KEY}
+        # # 実際にリクエストを送る
+        # bing_response = requests.get(search_url, headers=headers, params=params)
+        # bing_result = bing_response.json()["webPages"]["value"]
+        # total_result.append(bing_result)
+
         # ↑↑↑↑ここまでがBingの検索↑↑↑↑
         # ↓↓↓↓ここからGoogle検索↓↓↓↓
+        print(input_data)
+        print(input_data["text"])
         CUSTOM_SEARCH_ENGINE_ID = "4c81e5f5bf3c54cf3"
         GOOGLE_API_KEY          = "AIzaSyDhwvVQkJsxQAzEyjQoyw2kWChfjB1YKJc"
         search = build("customsearch","v1",developerKey = GOOGLE_API_KEY)

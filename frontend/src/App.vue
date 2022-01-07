@@ -5,26 +5,6 @@
           <v-col cols=2 class="text-center"><a href="/"><h1 style="color:white">Ging！</h1></a></v-col>
           <!-- <v-col cols=2 class="text-center"><a href="/"><img src="@/assets/Ging.png"/></a></v-col> -->
             <v-col cols=8 class="text-center" style="color:black">
-              <!-- <v-autocomplete
-                :search-input="InputText"
-                color="white"
-                item-text="Description"
-                cache-items
-                hide-no-data
-                hide-selected
-                return-object
-                outlined
-                rounded
-                append-icon="mdi-magnify"
-                background-color="grey lighten-2"
-                v-model="InputText"
-                @click:append="SendData(InputText); loading=true"
-                @keydown.enter="SendData(InputText); loading=true"
-                label="Search"
-                single-line
-                name="input-7-4"
-                type="text">
-              </v-autocomplete> -->
               <v-autocomplete
                 v-model="select"
                 :loading="Sug_Loading"
@@ -70,9 +50,6 @@
 <script>
 import Search from './components/Search.vue'
 import axios from 'axios'
-
-// import VueSimpleSuggest from 'vue-simple-suggest'
-// import 'vue-simple-suggest/dist/styles.css'
 
 export default {
   name: 'App',
