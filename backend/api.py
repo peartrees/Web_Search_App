@@ -36,9 +36,10 @@ class Call_Search(Resource):
         GOOGLE_API_KEY          = "AIzaSyDhwvVQkJsxQAzEyjQoyw2kWChfjB1YKJc"
         search = build("customsearch","v1",developerKey = GOOGLE_API_KEY)
         ggl_response = search.cse().list(q = input_data["text"], cx = CUSTOM_SEARCH_ENGINE_ID,
-        lr = 'lang_ja', num = 10, start = 1).execute()
+        lr = 'lang_ja', gl = 'jp', num = 10, start = 1).execute()
         ggl_result = ggl_response["items"]
         total_result.append(ggl_result)
+        print(total_result)
         return total_result
 
 

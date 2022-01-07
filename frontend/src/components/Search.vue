@@ -23,8 +23,9 @@
         <v-list>
           <v-list-item v-for="(value, index_ggl) in search_data[0]" :key="value.cacheid">
             <v-list-item-content>
+              <p v-html="value.link" style="font-size: 8pt; color: #A9A9A9"></p>
               <v-list-item-title>
-                <a v-bind:href="value.link" target="_blank">{{index_ggl+1}}. {{value.title}}</a>
+                <a v-bind:href="value.link" style="font-size: 15pt" target="_blank">{{index_ggl+1}}. {{value.title}}</a>
               </v-list-item-title>
             <p v-html="value.snippet"></p>
           </v-list-item-content>

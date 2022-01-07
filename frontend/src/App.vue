@@ -17,7 +17,7 @@
                 hide-details
                 label="Enter Your Query"
                 prepend-icon="mdi-magnify"
-                @click:prepend="SendData(InputText); loading=true"
+                @click:prepend="SendData(search); loading=true"
                 solo-inverted
                 background-color='#E0E0E0'
                 color='deep-purple darken-2'
@@ -31,7 +31,7 @@
         <v-overlay>
           <div id="content">
             <vue-loaders name="pacman" color="blue" scale="1"></vue-loaders>
-            <h1>Now Loading・・・</h1>
+            <h1>Now Searching・・・</h1>
           </div>
         </v-overlay>
         </v-container>
