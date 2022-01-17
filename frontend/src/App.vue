@@ -19,10 +19,15 @@
                 prepend-icon="mdi-magnify"
                 solo-inverted
                 @click:prepend="SendData(search); loading=true"
-                @keypress.enter="SendData(search); loading=true"
+                @keypress.enter="SendData(search); loading=true; selected=false"
                 background-color='blue'
                 color='deep-purple darken-2'
                 item-color='deep-purple darken-2'>
+                <!-- <template v-if="selected" slot="item" slot-scope="item">
+                  <v-list-title-content>
+                    <p>{{item}}</p>
+                  </v-list-title-content>
+                </template> -->
               </v-autocomplete>
             </v-col>
           </v-row>
@@ -67,7 +72,8 @@ export default {
       toChildSearchResult: '',
       search: '',
       select: '',
-      suggestCallBack: ''
+      suggestCallBack: '',
+      selected: true
     }
   },
   components: {
@@ -137,12 +143,5 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.SearchArea: {
-  color: blue;
-  ::selection {
-    background-color:blue;
-    color: blue;
-  }
 }
 </style>
