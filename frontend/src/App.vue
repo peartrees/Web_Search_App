@@ -2,7 +2,7 @@
   <v-app>
         <v-container fluid class="primary">
          <v-row align="center">
-          <v-col cols=2 class="text-center"><a href="/"><h1 style="color:white">Ging！</h1></a></v-col>
+          <v-col cols=2 class="text-center"><a href="/"><h1 style="color:white">CredSearch！</h1></a></v-col>
           <!-- <v-col cols=2 class="text-center"><a href="/"><img src="@/assets/Ging.png"/></a></v-col> -->
             <v-col cols=8 class="text-center" style="color:black">
               <v-autocomplete
@@ -23,11 +23,6 @@
                 background-color='blue'
                 color='deep-purple darken-2'
                 item-color='deep-purple darken-2'>
-                <!-- <template v-if="selected" slot="item" slot-scope="item">
-                  <v-list-title-content>
-                    <p>{{item}}</p>
-                  </v-list-title-content>
-                </template> -->
               </v-autocomplete>
             </v-col>
           </v-row>
