@@ -18,8 +18,8 @@
                 label="Enter Your Query"
                 prepend-icon="mdi-magnify"
                 solo-inverted
-                @click:prepend="SendData(search); loading=true"
-                @keypress.enter="SendData(search); loading=true; selected=false"
+                @click:prepend="SendData(search); SendSQL(search); loading=true"
+                @keypress.enter="SendData(search); SendSQL(search); loading=true; selected=false"
                 background-color='grey'
                 color='black'
                 item-color='black'
@@ -31,7 +31,7 @@
         <v-container v-show="loading === true" class="primary">
         <v-overlay>
           <div id="content">
-            <vue-loaders name="pacman" color="primary" scale="1"></vue-loaders>
+            <vue-loaders name="pacman" color="#1976D2" scale="1"></vue-loaders>
             <h1>Now Searching・・・</h1>
           </div>
         </v-overlay>
@@ -112,6 +112,20 @@ export default {
           this.items = response.data
           console.log(response.data)
           this.Sug_Loading = false
+        })
+        .catch(err => {
+          alert('APIサーバと接続できません')
+          err = null
+        })
+    },
+    SendSQL: function (input) {
+      const data = { text: input }
+      // console.log(input)
+      // console.log(data)
+      axios
+        .post('/api/send_sql/post', data)
+        .then(response => {
+          console.log('データベースへの送信完了')
         })
         .catch(err => {
           alert('APIサーバと接続できません')

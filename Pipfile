@@ -10,6 +10,8 @@ requests = "*"
 gunicorn = "*"
 google-api-python-client = "*"
 lxml = "*"
+mysql-connector-python = "*"
+datetime = "*"
 
 [dev-packages]
 

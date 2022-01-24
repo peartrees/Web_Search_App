@@ -4,13 +4,18 @@ import requests
 import json
 from lxml import etree
 import time
+import datetime
 from googleapiclient.discovery import build
+import mysql.connector
 
 # postされたテキストを検索するapi(POSTメソッド)
 Search_bp = Blueprint('Call_Search_API', __name__, url_prefix='/api/call_search/post')
 
 # postされたテキストを検索するapi(getメソッド)
 Suggest_bp = Blueprint('Get_Suggest_API', __name__, url_prefix='/api/get_suggest/get')
+
+# データベース処理を扱うapi(postメソッド)
+SQL_bp = Blueprint('Send_SQL_API', __name__, url_prefix='/api/send_sql/post')
 
 class Call_Search(Resource):
     def post(self):
@@ -32,7 +37,6 @@ class Call_Search(Resource):
 
         # ↑↑↑↑ここまでがBingの検索↑↑↑↑
         # ↓↓↓↓ここからGoogle検索↓↓↓↓
-        # print(input_data["text"])
         CUSTOM_SEARCH_ENGINE_ID = "4c81e5f5bf3c54cf3"
         GOOGLE_API_KEY          = "AIzaSyDhwvVQkJsxQAzEyjQoyw2kWChfjB1YKJc"
         search = build("customsearch","v1",developerKey = GOOGLE_API_KEY)
@@ -40,7 +44,6 @@ class Call_Search(Resource):
         lr = 'lang_ja', gl = 'jp', num = 10, start = 1).execute()
         ggl_result = ggl_response["items"]
         total_result.append(ggl_result)
-        # print(total_result)
         return total_result
 
 
@@ -61,8 +64,59 @@ class Get_Suggest(Resource):
         return google_sugstrs
 
 
+class Send_SQL(Resource):
+    def post(self):
+        user_query = request.json["text"]
+        dt_now = datetime.datetime.now()
+        print("Executing SQL")
+        def conn_db():
+              conn_to_db = mysql.connector.connect(
+                      host = 'localhost',      # localhostでもOK
+                      user = 'yutaimasaka',    # データベースにログインするuser
+                      passwd = 'pass1234',     # データベースへのパスワード
+                      db = 'search_log'        # 利用するデータベース
+              )
+              return conn_to_db
+
+        # SQL文
+        sql = ('''
+            INSERT INTO logs
+                (time, query)
+            VALUES
+                (%s, %s)
+            ''')
+        data = [(dt_now, user_query)]
+        # sql = 'SELECT * FROM logs'
+
+        try:
+              # DBとのconnection確立
+              con_to_db = conn_db()
+              # カーソルを取得
+              cursor = con_to_db.cursor()
+              # sql文を投げる
+              cursor.executemany(sql, data)
+              # cursor.execute(sql)
+              con_to_db.commit()
+              print(f"{cursor.rowcount} records inserted.")
+              cursor.close()
+              con_to_db.close()
+              # selectの結果を全件タプルに格納
+              # rows = cursor.fetchall()
+              # print(rows)
+
+        except(mysql.connector.errors.ProgrammingError) as e:
+              print('エラー')
+              print(e)
+
+        # print(f'{sql.split()[0]}文実行')
+        return "Done"
+
+
 Call_Search_API = Api(Search_bp)
 Call_Search_API.add_resource(Call_Search, '')
-#
+
 Get_Suggest_API = Api(Suggest_bp)
 Get_Suggest_API.add_resource(Get_Suggest, '')
+
+Send_SQL_API = Api(SQL_bp)
+Send_SQL_API.add_resource(Send_SQL, '')
