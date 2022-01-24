@@ -2,9 +2,9 @@
   <v-app>
         <v-container fluid class="primary">
          <v-row align="center">
-          <v-col cols=2 class="text-center"><a href="/"><h1 style="color:white">CredSearch！</h1></a></v-col>
+          <v-col cols=2 class="text-center"><a href="/"><h1 style="color:white">Creds！</h1></a></v-col>
           <!-- <v-col cols=2 class="text-center"><a href="/"><img src="@/assets/Ging.png"/></a></v-col> -->
-            <v-col cols=8 class="text-center" style="color:black">
+            <v-col cols=8 class="text-center" style="color: red">
               <v-autocomplete
                 v-model="select"
                 :loading="Sug_Loading"
@@ -20,17 +20,18 @@
                 solo-inverted
                 @click:prepend="SendData(search); loading=true"
                 @keypress.enter="SendData(search); loading=true; selected=false"
-                background-color='blue'
-                color='deep-purple darken-2'
-                item-color='deep-purple darken-2'>
+                background-color='grey'
+                color='black'
+                item-color='black'
+                style="color: #6200EE">
               </v-autocomplete>
             </v-col>
           </v-row>
        </v-container>
-        <v-container v-show="loading === true">
+        <v-container v-show="loading === true" class="primary">
         <v-overlay>
           <div id="content">
-            <vue-loaders name="pacman" color="blue" scale="1"></vue-loaders>
+            <vue-loaders name="pacman" color="primary" scale="1"></vue-loaders>
             <h1>Now Searching・・・</h1>
           </div>
         </v-overlay>
@@ -41,7 +42,7 @@
        <v-col><br></v-col>
        <v-container>
         <v-footer color="primary" dark absolute app>
-          <v-col class="font-weight-medium text-center" cols=12>Copyright © Ging! All Rights Reserved</v-col>
+          <v-col class="font-weight-medium text-center" cols=12>Copyright © Creds! All Rights Reserved</v-col>
         </v-footer>
        </v-container>
   </v-app>
@@ -139,4 +140,5 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 </style>
