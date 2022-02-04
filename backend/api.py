@@ -24,21 +24,10 @@ class Call_Search(Resource):
         # postされたデータを読み込み
         input_data = request.json
         # Bing Web Search APIを利用してWeb検索結果を取得する
-
-        # SUBSCRIPTION_KEY = 'd4d1d0c6fb0a494ba8fa3906b1224e48'
-        # search_url = f"https://api.bing.microsoft.com/v7.0/search"
-        # params = {"q": input_data["text"], "count": 10, "textDecorations": True, "textFormat": "HTML"}
-        # # HTTPリクエストのヘッダにAPIキーを含める
-        # headers = {"Ocp-Apim-Subscription-Key" : SUBSCRIPTION_KEY}
-        # # 実際にリクエストを送る
-        # bing_response = requests.get(search_url, headers=headers, params=params)
-        # bing_result = bing_response.json()["webPages"]["value"]
-        # total_result.append(bing_result)
-
         # ↑↑↑↑ここまでがBingの検索↑↑↑↑
         # ↓↓↓↓ここからGoogle検索↓↓↓↓
-        CUSTOM_SEARCH_ENGINE_ID = "4c81e5f5bf3c54cf3"
-        GOOGLE_API_KEY          = "AIzaSyDhwvVQkJsxQAzEyjQoyw2kWChfjB1YKJc"
+        CUSTOM_SEARCH_ENGINE_ID = "XXXX"
+        GOOGLE_API_KEY          = "XXXX"
         search = build("customsearch","v1",developerKey = GOOGLE_API_KEY)
         ggl_response = search.cse().list(q = input_data["text"], cx = CUSTOM_SEARCH_ENGINE_ID,
         lr = 'lang_ja', gl = 'jp', num = 10, start = 1).execute()
@@ -71,10 +60,10 @@ class Send_SQL(Resource):
         print("Executing SQL")
         def conn_db():
               conn_to_db = mysql.connector.connect(
-                      host = 'localhost',      # localhostでもOK
-                      user = 'yutaimasaka',    # データベースにログインするuser
-                      passwd = 'pass1234',     # データベースへのパスワード
-                      db = 'search_log'        # 利用するデータベース
+                      host = 'XXXX',      # localhostでもOK
+                      user = 'XXXX',    # データベースにログインするuser
+                      passwd = 'XXXX',     # データベースへのパスワード
+                      db = 'XXXX'        # 利用するデータベース
               )
               return conn_to_db
 
